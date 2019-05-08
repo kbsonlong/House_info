@@ -12,6 +12,14 @@ from elasticsearch_dsl.connections import connections
 connections.create_connection(hosts="192.168.99.163")
 
 class HouseType(Document):
+    city_name= Text(analyzer="ik_max_word")
+    district_name= Text(analyzer="ik_max_word")
+    bizcircle_name= Text(analyzer="ik_max_word")
+    address= Text(analyzer="ik_max_word")
+    url = Keyword()
+    open_date = Date()
+    sale_status= Text(analyzer="ik_max_word")
+    price = Integer()
     class Index:
         name = 'house_bk'
 
@@ -31,5 +39,6 @@ class ElasticsearchPipeline(object):
         house.converged_rooms = item['converged_rooms']
         house.price = item['price']
         house.open_date = item['open_date']
+        house.sale_status = item['sale_status']
         house.save()
         return item
