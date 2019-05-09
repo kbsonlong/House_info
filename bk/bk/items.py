@@ -28,4 +28,5 @@ class BkItem(scrapy.Item):
     open_date = scrapy.Field()
     price = scrapy.Field()
     url = scrapy.Field()
+    house_from = scrapy.Field()
 

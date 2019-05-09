@@ -33,7 +33,7 @@ unzip elasticsearch-analysis-ik-6.7.1.zip
 
 #### 4.2 重新启动es集群,将plugins目录挂载进容器
 ```text
-docker run --net=host -d --restart=always --name env-es01 \
+docker run --net=host -d --restart=always --name es01 \
            --ulimit memlock=-1:-1 \
             --log-driver json-file --log-opt max-size=10m --log-opt max-file=7 \
            -e cluster.name=kie-cluster \
@@ -46,6 +46,6 @@ docker run --net=host -d --restart=always --name env-es01 \
 
 ```text
 docker run --net=host -d --restart=always --name kibana \
-           -e ELASTICSEARCH_HOSTS=http://192.168.99.163:9200 \
+           -e ELASTICSEARCH_HOSTS=http://10.0.0.5:9200 \
            docker.elastic.co/kibana/kibana:6.7.1
 ```

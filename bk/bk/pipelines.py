@@ -9,7 +9,7 @@ from elasticsearch_dsl import Text, Date, Keyword, Integer, Document, Completion
 from elasticsearch_dsl.connections import connections
 
 # 新建连接
-connections.create_connection(hosts="192.168.99.163")
+connections.create_connection(hosts="40.73.69.2")
 
 class HouseType(Document):
     city_name= Text(analyzer="ik_max_word")
@@ -40,5 +40,6 @@ class ElasticsearchPipeline(object):
         house.price = item['price']
         house.open_date = item['open_date']
         house.sale_status = item['sale_status']
+        house.house_from = item['house_from']
         house.save()
         return item
