@@ -7,13 +7,16 @@ from bk.items import BkItem
 class BeikwSpider(scrapy.Spider):
     name = 'beikw'
     allowed_domains = ['fang.ke.com']
-    start_urls = ['https://gz.fang.ke.com/']
+    start_urls = ['https://gz.fang.ke.com/',
+                  'https://gz.fang.lianjia.com/']
 
     def start_requests(self):
-        base_url = 'https://gz.fang.ke.com/loupan/pg'
-        for i in range(1,100):
-            url = '{}{}/?_t=1'.format(base_url,i)
-            yield scrapy.Request(url=url, callback=self.parse)
+        for base_url in self.start_urls:
+            # base_url = 'https://gz.fang.ke.com/'
+            for i in range(1,100):
+                url = '{}/loupan/pg{}/?_t=1'.format(base_url.strip('/'),i)
+                print(url)
+                yield scrapy.Request(url=url, callback=self.parse)
 
     def parse(self, response):
         house_lists = json.loads(response.body)['data']['list']
