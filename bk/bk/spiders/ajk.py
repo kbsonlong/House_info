@@ -45,11 +45,11 @@ class AjkSpider(scrapy.Spider):
         soup = BeautifulSoup(response.text, "lxml")
         content = soup.find_all('a',class_="lp-name")  # 返回每个楼盘的对应数据
         for house in content:
-            print(house)
+            # print(house)
             code = house["href"].split("/")[-1][:6]
-            print(code)
+            # print(code)
             real_href = "http://gz.fang.anjuke.com/loupan/canshu-{}.html?from=loupan_tab".format(code)  # 拼凑出楼盘详情页的url
-            # yield scrapy.Request(url=real_href,callback=self.real_parse)
+            yield scrapy.Request(url=real_href,callback=self.real_parse)
     def real_parse(self,response):
         soup = BeautifulSoup(response.text, "lxml")
         a = re.findall(r'<div class="name">(.*?)</div>', str(soup))
