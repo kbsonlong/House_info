@@ -24,13 +24,8 @@ class HouseType(Document):
         name = 'house_bk'
 
 class BkPipeline(object):
-
-
     def process_item(self, item, spider):
         return item
-
-
-
 
 
 class ElasticsearchPipeline(object):

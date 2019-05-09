@@ -30,5 +30,3 @@ class BkItem(scrapy.Item):
     url = scrapy.Field()
     house_from = scrapy.Field()
 
-class AjkItem(scrapy.item):
-    pass
